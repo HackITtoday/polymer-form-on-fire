@@ -20,7 +20,7 @@
     <template>
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       </br>
-      <firebase-element id="base" dataChange="{{saved}}" location="https://shining-fire-8330.firebaseio.com/" data="{{data}}" keys="{{keys}}">
+      <firebase-element id="base" on-child-added="{{childAdded}}" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
       <paper-input value={{input}} ></paper-input>
       <paper-input value={{name}} ></paper-input>
@@ -32,10 +32,9 @@
         ready: function() {
           this.dateFrom = moment();
           this.input = "";
-          this.named = "";
+          this.name= "";
         },
-        saved: function() {
-          this.ready();
+        childAdded: function(e) {
         },
         addEntry: function() {
           this.$.base.push({
@@ -43,6 +42,7 @@
 		input: this.input,
                 name: this.name
           });
+          this.ready();
         }
       });
   </script>
