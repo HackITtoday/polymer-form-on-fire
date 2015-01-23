@@ -35,11 +35,12 @@
         ready: function() {
           this.dateFrom = moment();
           this.data={
-            nights:this.dataNights,
-            guests:this.dataGuests,
-            name:this.dataName,
-            email:this.dataEmail,
-            phone:this.dataPhone
+            date:"",
+            nights:"",
+            guests:"",
+            name:"",
+            email:"",
+            phone:""
           };
         },
        dataNights:"",
@@ -49,7 +50,14 @@
        dataPhone:"",
        data:{},
         addEntry: function() {
-          this.data.date = this.dateFrom+'';
+          this.data={
+            date:this.dateFrom+"",
+            nights:this.dataNights,
+            guests:this.dataGuests,
+            name:this.dataName,
+            email:this.dataEmail,
+            phone:this.dataPhone
+          };
           this.$.base.push(this.data);
           this.ready();
         }
