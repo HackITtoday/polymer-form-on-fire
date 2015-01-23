@@ -1,0 +1,17 @@
+{
+  "name": "poly-form",
+  "version": "0.0.1",
+  "authors": [
+    "Marcus Hitchins <marcus@hhost.me>"
+  ],
+  "description": "firebace form",
+  "main": "poly-form.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
