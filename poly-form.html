@@ -20,10 +20,13 @@
     <template>
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       </br>
-      <firebase-element id="base" on-child-added="{{childAdded}}" location="https://shining-fire-8330.firebaseio.com/">
+      <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
-      <paper-input value={{input}} ></paper-input>
-      <paper-input value={{name}} ></paper-input>
+      <paper-input label="Nights" value="{{dataNights}}" floatinglabel id="nights"></paper-input><br>
+      <paper-input label="Number of Guests" value="{{dataGuests}}" floatinglabel id="guests"></paper-input><br>
+      <paper-input label="Name" value="{{dataName}}" floatinglabel id="name"></paper-input><br>
+      <paper-input label="Email" value="{{dataEmail}}" floatinglabel id="email"></paper-input><br>
+      <paper-input label="Telephone" value="{{dataPhone}}" floatinglabel id="telephone"></paper-input><br>
       <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
     </template>
     <script>
@@ -31,17 +34,23 @@
         // initialize the element's model
         ready: function() {
           this.dateFrom = moment();
-          this.input = "";
-          this.name= "";
+          this.data={
+            nights:this.dataNights,
+            guests:this.dataGuests,
+            name:this.dataName,
+            email:this.dataEmail,
+            phone:this.dataPhone
+          };
         },
-        childAdded: function(e) {
-        },
+       dataNights:"",
+       dataGuests:"",
+       dataName:"",
+       dataEmail:"",
+       dataPhone:"",
+       data:{},
         addEntry: function() {
-          this.$.base.push({
-                date: this.dateFrom+"",
-		input: this.input,
-                name: this.name
-          });
+          this.data.date = this.dateFrom+'';
+          this.$.base.push(this.data);
           this.ready();
         }
       });
