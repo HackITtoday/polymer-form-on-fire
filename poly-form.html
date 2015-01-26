@@ -10,6 +10,7 @@
     <link rel="import" href="bower_components/paper-datepicker/paper-datepicker.html" />
     <link rel="import" href="bower_components/paper-input/paper-input.html" />
     <link rel="import" href="bower_components/paper-button/paper-button.html" />
+    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
 
     <title>Paper-datepicker demo</title>
   </head>
@@ -49,7 +50,8 @@
       <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
       </paper-input-decorator>
-      <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
+      <paper-button raised label="OK" on-click="{{addEntry}};document.querySelector('#toast1').show()">OK</paper-button>
+      <paper-toast text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     </template>
     <script>
       Polymer('polymer-firebase-form', {
