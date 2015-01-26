@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/HackITtoday/polymer-form-on-fire.png?label=ready&title=Ready)](https://waffle.io/HackITtoday/polymer-form-on-fire)
      ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
     '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
     |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
