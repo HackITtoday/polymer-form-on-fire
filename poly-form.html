@@ -14,23 +14,45 @@
     <title>Paper-datepicker demo</title>
   </head>
   <body unresolved>
-    <polymer-firebase-input></polymer-firebase-input>
+    <polymer-firebase-form></polymer-firebase-form>
   </body>
-  <polymer-element name="polymer-firebase-input">
-    <template>
+  <polymer-element name="polymer-firebase-form">
+    <template id="polymer-firebase-form">
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       </br>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
-      <paper-input label="Nights" value="{{dataNights}}" floatinglabel id="nights"></paper-input><br>
-      <paper-input label="Number of Guests" value="{{dataGuests}}" floatinglabel id="guests"></paper-input><br>
-      <paper-input label="Name" value="{{dataName}}" floatinglabel id="name"></paper-input><br>
-      <paper-input label="Email" value="{{dataEmail}}" floatinglabel id="email"></paper-input><br>
-      <paper-input label="Telephone" value="{{dataPhone}}" floatinglabel id="telephone"></paper-input><br>
+      <paper-input-decorator>
+        <input validate="^[0-9]*$" error="Input     is not a number!" label="Number of Guests" value="{{dataGuests}}" floatinglabel id="guests"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator>
+        <input validate="^[a-zA-Z ]+$" label="Name" value="{{dataName}}" floatinglabel id="name"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator>
+        <input type="email" label="Email" value="{{dataEmail}}" floatinglabel id="email"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator error="Number of nights please" label="Nights" floatinglabel >
+      <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
+      </paper-input-decorator>
+      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      </paper-input-decorator>
+      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      </paper-input-decorator>
       <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
     </template>
     <script>
-      Polymer('polymer-firebase-input', {
+      Polymer('polymer-firebase-form', {
         // initialize the element's model
         ready: function() {
           this.dateFrom = moment();
@@ -46,6 +68,11 @@
        dataName:"",
        dataEmail:"",
        dataPhone:"",
+       inputAction:function(e) {
+         console.log( e.target.validity.valid );
+         console.log( e );
+
+       },
        data:{},
         addEntry: function() {
           this.data={
