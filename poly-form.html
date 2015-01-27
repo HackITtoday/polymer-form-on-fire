@@ -82,11 +82,11 @@
               name:this.dataName,
               email:this.dataEmail,
               phone:this.dataPhone
-            };
-	  }
-          this.$.toast1.show();
-          this.$.base.push(this.data);
-          this.ready();
+          };
+          if ( this.$.base.push(this.data) != false ) {
+	    this.$.toast1.show();
+            this.ready();
+          }
         }
       });
   </script>
