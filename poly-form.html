@@ -23,29 +23,14 @@
       </br>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
-      <paper-input-decorator>
-        <input validate="^[0-9]*$" error="Input     is not a number!" label="Number of Guests" value="{{dataGuests}}" floatinglabel id="guests"></input><br>
-      </paper-input-decorator>
-      <paper-input-decorator>
-        <input validate="^[a-zA-Z ]+$" label="Name" value="{{dataName}}" floatinglabel id="name"></input><br>
-      </paper-input-decorator>
-      <paper-input-decorator>
-        <input type="email" label="Email" value="{{dataEmail}}" floatinglabel id="email"></input><br>
-      </paper-input-decorator>
       <paper-input-decorator error="Number of nights please" label="Nights" floatinglabel >
       <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
       </paper-input-decorator>
-      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      <paper-input-decorator validate="" error="This is not a phone number!" label="Number of Guests" floatinglabel >
+        <input value="{{dataGuests}}" is="core-input" id="guests"></input><br>
       </paper-input-decorator>
-      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
-      </paper-input-decorator>
-      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
-      </paper-input-decorator>
-      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+      <paper-input-decorator validate="" error="This is not a phone number!" label="Email" floatinglabel >
+        <input value="{{dataEmail}}" is="core-input" id="email"></input><br>
       </paper-input-decorator>
       <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
@@ -75,16 +60,27 @@
          console.log( e );
 
        },
+       check:function(e) {
+	 console.log( e.target.validity.valid );
+	 console.log( e );
+         this.dataNights = 
+         this.dataGuests,
+         this.dataName,
+         this.dataEmail,
+         this.dataPhone
+       },
        data:{},
         addEntry: function() {
-          this.data={
-            date:this.dateFrom+"",
-            nights:this.dataNights,
-            guests:this.dataGuests,
-            name:this.dataName,
-            email:this.dataEmail,
-            phone:this.dataPhone
-          };
+	  if (this.check) {
+            this.data={
+              date:this.dateFrom+"",
+              nights:this.dataNights,
+              guests:this.dataGuests,
+              name:this.dataName,
+              email:this.dataEmail,
+              phone:this.dataPhone
+            };
+	  }
           this.$.base.push(this.data);
           this.ready();
         }
