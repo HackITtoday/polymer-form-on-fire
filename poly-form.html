@@ -19,29 +19,32 @@
   </body>
   <polymer-element name="polymer-firebase-form">
     <template id="polymer-firebase-form">
+      <paper-input-decorator error="Number of nights please" label="Name" floatinglabel >
+        <input value="{{dataName}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
+      </paper-input-decorator>
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
-      </br>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
       <paper-input-decorator error="Number of nights please" label="Nights" floatinglabel >
       <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
       </paper-input-decorator>
       <paper-input-decorator validate="" error="This is not a phone number!" label="Number of Guests" floatinglabel >
-        <input value="{{dataGuests}}" is="core-input" id="guests"></input><br>
+        <input value="{{dataGuests}}" is="core-input" id="guests"></input>
       </paper-input-decorator>
       <paper-input-decorator validate="" error="This is not a phone number!" label="Email" floatinglabel >
-        <input value="{{dataEmail}}" is="core-input" id="email"></input><br>
+        <input value="{{dataEmail}}" is="core-input" id="email"></input>
       </paper-input-decorator>
       <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input><br>
+        <input value="{{dataPhone}}" is="core-input" id="telephone"></input>
       </paper-input-decorator>
-      <paper-button raised label="OK" on-click="{{addEntry}};document.querySelector('#toast1').show()">OK</paper-button>
-      <paper-toast text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
+      <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
+      <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     </template>
     <script>
       Polymer('polymer-firebase-form', {
         // initialize the element's model
         ready: function() {
+	  el = document.getElementById('toast1');
           this.dateFrom = moment();
           this.dataDate="";
           this.dataNights="";
@@ -58,16 +61,16 @@
        inputAction:function(e) {
          console.log( e.target.validity.valid );
          console.log( e );
-
        },
        check:function(e) {
-	 console.log( e.target.validity.valid );
-	 console.log( e );
-         this.dataNights = 
-         this.dataGuests,
-         this.dataName,
-         this.dataEmail,
-         this.dataPhone
+//	 console.log( e.target.validity.valid );
+//	 console.log( e );
+    //     this.dataNights  
+    //     this.dataGuests
+    //     this.dataName,
+    //     this.dataEmail,
+    //     this.dataPhone
+	 return true;
        },
        data:{},
         addEntry: function() {
@@ -81,6 +84,7 @@
               phone:this.dataPhone
             };
 	  }
+          this.$.toast1.show();
           this.$.base.push(this.data);
           this.ready();
         }
