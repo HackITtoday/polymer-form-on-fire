@@ -19,13 +19,13 @@
   <polymer-element name="polymer-firebase-form">
     <template id="polymer-firebase-form">
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
-    <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName" on-input="{{inputAction}}" ></input>
+    <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName"></input>
     </paper-input-decorator><br />
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/data/">
       </firebase-element>
       <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
-        <input value="{{dataNights}}" is="core-input" type="number" on-input="{{inputAction}}"id="inputNights" ></input>
+        <input value="{{dataNights}}" is="core-input" type="number" id="inputNights" ></input>
       </paper-input-decorator><br />
       <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
         <input value="{{dataGuests}}" type="number" is="core-input" id="inputGuests" ></input>
@@ -56,10 +56,6 @@
        dataName:"",
        dataEmail:"",
        dataPhone:"",
-       inputAction:function(e) {
-         console.log( e.target.validity.valid );
-         console.log( e );
-       },
        check:function(e) {
 	 return (moment(this.dateFrom).isAfter() && $.inputEmail.validity.valid);
        },
