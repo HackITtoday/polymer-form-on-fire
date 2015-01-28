@@ -20,22 +20,22 @@
     <template id="polymer-firebase-form">
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
     <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName" on-input="{{inputAction}}" ></input>
-      </paper-input-decorator>
+    </paper-input-decorator><br />
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
       <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
-      <input value="{{dataNights}}" is="core-input" type="number" on-input="{{inputAction}}"id="inputNights" ></input>
-      </paper-input-decorator>
+        <input value="{{dataNights}}" is="core-input" type="number" on-input="{{inputAction}}"id="inputNights" ></input>
+      </paper-input-decorator><br />
       <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
         <input value="{{dataGuests}}" type="number" is="core-input" id="inputGuests" ></input>
-      </paper-input-decorator>
+      </paper-input-decorator><br />
       <paper-input-decorator error="Email Address please" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
         <input value="{{dataEmail}}" type="email" is="core-input" id="inputEmail"></input>
-      </paper-input-decorator>
+      </paper-input-decorator><br />
       <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" type="number" is="core-input" id="inputPhone"></input>
-      </paper-input-decorator>
+      </paper-input-decorator><br />
       <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
       <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     </template>
