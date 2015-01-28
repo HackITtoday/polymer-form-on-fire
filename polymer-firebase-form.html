@@ -19,23 +19,23 @@
   </body>
   <polymer-element name="polymer-firebase-form">
     <template id="polymer-firebase-form">
-      <paper-input-decorator error="Number of nights please" label="Name" floatinglabel >
-        <input value="{{dataName}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
+    <paper-input-decorator error="Just your Name Please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
+    <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName" on-input="{{inputAction}}" ></input>
       </paper-input-decorator>
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
-      <paper-input-decorator error="Number of nights please" label="Nights" floatinglabel >
-      <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}" ></input>
+      <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
+      <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}"id="inputNights" ></input>
       </paper-input-decorator>
-      <paper-input-decorator validate="" error="This is not a phone number!" label="Number of Guests" floatinglabel >
-        <input value="{{dataGuests}}" is="core-input" id="guests"></input>
+      <paper-input-decorator error="This is not a phone number!" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
+        <input value="{{dataGuests}}" is="core-input" id="inputGuests" ></input>
       </paper-input-decorator>
-      <paper-input-decorator validate="" error="This is not a phone number!" label="Email" floatinglabel >
-        <input value="{{dataEmail}}" is="core-input" id="email"></input>
+      <paper-input-decorator error="This is not a phone number!" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
+        <input value="{{dataEmail}}" type="email" is="core-input" id="inputEmail"></input>
       </paper-input-decorator>
-      <paper-input-decorator validate="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="telephone"></input>
+      <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
+        <input value="{{dataPhone}}" is="core-input" id="inputPhone"></input>
       </paper-input-decorator>
       <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
       <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
@@ -44,7 +44,6 @@
       Polymer('polymer-firebase-form', {
         // initialize the element's model
         ready: function() {
-	  el = document.getElementById('toast1');
           this.dateFrom = moment();
           this.dataDate="";
           this.dataNights="";
@@ -63,14 +62,7 @@
          console.log( e );
        },
        check:function(e) {
-//	 console.log( e.target.validity.valid );
-//	 console.log( e );
-    //     this.dataNights  
-    //     this.dataGuests
-    //     this.dataName,
-    //     this.dataEmail,
-    //     this.dataPhone
-	 return true;
+	 return (moment(this.dateFrom).isAfter());
        },
        data:{},
         addEntry: function() {
@@ -82,13 +74,13 @@
               name:this.dataName,
               email:this.dataEmail,
               phone:this.dataPhone
-          };
-          if ( this.$.base.push(this.data) != false ) {
-	    this.$.toast1.show();
-            this.ready();
-          }
+	    };
+	    if ( this.$.base.push(this.data) != false ) {
+	      this.$.toast1.show();
+	      this.ready();
+	    }
+	  }
         }
-      }
       });
   </script>
   </polymer-element>
