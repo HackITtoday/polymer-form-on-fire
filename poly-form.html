@@ -1,0 +1,25 @@
+
+<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+<link rel="import" href="bower_components/polymer/polymer.html" />
+<link rel="import" href="polymer-firebase-form.html" />
+<body unresolved>
+  <paper-rfp></paper-rfp>
+</body>
+<polymer-element name="paper-rfp">
+  <template>
+    <paper-button on-click="{{loadFrom}}" raised role="button" tabindex="0"> 
+      <paper-action-dialog id="loadFrom" backdrop >
+        <polymer-firebase-form></polymer-firebase-form>
+      </paper-action-dialog>
+    </paper-button>
+  </template>
+  <script>
+Polymer("paper-rfp", {
+  loadFrom: function(e) {
+    this.$.loadFrom.toggle();
+  },
+  ready: function() {
+  }
+});
+  </script>
+</polymer-element>  
