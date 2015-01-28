@@ -1,5 +1,4 @@
-<html>
-  <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
@@ -19,23 +18,23 @@
   </body>
   <polymer-element name="polymer-firebase-form">
     <template id="polymer-firebase-form">
-    <paper-input-decorator error="Just your Name Please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
+    <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
     <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName" on-input="{{inputAction}}" ></input>
       </paper-input-decorator>
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/">
       </firebase-element>
       <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
-      <input value="{{dataNights}}" is="core-input" pattern="\d+" on-input="{{inputAction}}"id="inputNights" ></input>
+      <input value="{{dataNights}}" is="core-input" type="number" on-input="{{inputAction}}"id="inputNights" ></input>
       </paper-input-decorator>
-      <paper-input-decorator error="This is not a phone number!" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
-        <input value="{{dataGuests}}" is="core-input" id="inputGuests" ></input>
+      <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
+        <input value="{{dataGuests}}" type="number" is="core-input" id="inputGuests" ></input>
       </paper-input-decorator>
-      <paper-input-decorator error="This is not a phone number!" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
+      <paper-input-decorator error="Email Address please" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
         <input value="{{dataEmail}}" type="email" is="core-input" id="inputEmail"></input>
       </paper-input-decorator>
       <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
-        <input value="{{dataPhone}}" is="core-input" id="inputPhone"></input>
+        <input value="{{dataPhone}}" type="number" is="core-input" id="inputPhone"></input>
       </paper-input-decorator>
       <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
       <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
@@ -62,7 +61,7 @@
          console.log( e );
        },
        check:function(e) {
-	 return (moment(this.dateFrom).isAfter());
+	 return (moment(this.dateFrom).isAfter() && $.inputEmail.validity.valid);
        },
        data:{},
         addEntry: function() {
