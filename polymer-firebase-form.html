@@ -1,28 +1,17 @@
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
-
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="bower_components/polymer/polymer.html" />
-    <link rel="import" href="bower_components/firebase-element/firebase-element.html" />
-    <link rel="import" href="bower_components/paper-datepicker/paper-datepicker.html" />
-    <link rel="import" href="bower_components/paper-input/paper-input.html" />
-    <link rel="import" href="bower_components/paper-button/paper-button.html" />
-    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-
-    <title>Paper-datepicker demo</title>
-  </head>
-  <body unresolved>
-    <polymer-firebase-form></polymer-firebase-form>
-  </body>
-  <polymer-element name="polymer-firebase-form">
+link rel="import" href="bower_components/polymer/polymer.html" />
+<link rel="import" href="bower_components/firebase-element/firebase-element.html" />
+<link rel="import" href="bower_components/paper-datepicker/paper-datepicker.html" />
+<link rel="import" href="bower_components/paper-input/paper-input.html" />
+<link rel="import" href="bower_components/paper-button/paper-button.html" />
+<link rel="import" href="bower_components/paper-toast/paper-toast.html">
+  <polymer-element name="polymer-firebase-form" attributes="firebase_url on-submit">
     <template id="polymer-firebase-form">
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
     <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName"></input>
     </paper-input-decorator><br />
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
-      <firebase-element id="base" location="https://shining-fire-8330.firebaseio.com/data/">
+      <firebase-element id="base" location="{{firebase_url}}">
       </firebase-element>
       <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
         <input value="{{dataNights}}" is="core-input" type="number" id="inputNights" ></input>
@@ -72,6 +61,7 @@
 	    };
 	    if ( this.$.base.push(this.data) != false ) {
 	      this.$.toast1.show();
+	      this.on-submit();
 	      this.ready();
 	    }
 	  }
