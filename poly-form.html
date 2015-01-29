@@ -10,7 +10,7 @@
     <paper-button on-click="{{loadFrom}}" raised role="button" tabindex="0"> 
       Booking inquiry
       <paper-action-dialog id="loadFrom" backdrop >
-      <polymer-firebase-form firebase_url="https://shining-fire-8330.firebaseio.com/data/" on-submit="{{loadFrom}}"></polymer-firebase-form>
+      <polymer-firebase-form firebase_url="https://shining-fire-8330.firebaseio.com/data/" on_submit="{{loadFrom}}"></polymer-firebase-form>
       </paper-action-dialog>
     </paper-button>
   </template>
@@ -18,8 +18,6 @@
 Polymer("paper-rfp", {
   loadFrom: function(e) {
     this.$.loadFrom.toggle();
-  },
-  ready: function() {
   }
 });
   </script>

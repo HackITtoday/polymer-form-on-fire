@@ -1,14 +1,14 @@
 
-link rel="import" href="bower_components/polymer/polymer.html" />
+<link rel="import" href="bower_components/polymer/polymer.html" />
 <link rel="import" href="bower_components/firebase-element/firebase-element.html" />
 <link rel="import" href="bower_components/paper-datepicker/paper-datepicker.html" />
 <link rel="import" href="bower_components/paper-input/paper-input.html" />
 <link rel="import" href="bower_components/paper-button/paper-button.html" />
 <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-  <polymer-element name="polymer-firebase-form" attributes="firebase_url on-submit">
+  <polymer-element name="polymer-firebase-form" attributes="firebase_url on_submit">
     <template id="polymer-firebase-form">
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
-    <input value="{{dataName}}" is="core-input" pattern="^\w+\s?\w*$" id="inputName"></input>
+    <input value="{{dataName}}" is="core-input" pattern="^[\w-]+\s?[\w-]*$" id="inputName"></input>
     </paper-input-decorator><br />
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="{{firebase_url}}">
@@ -16,7 +16,7 @@ link rel="import" href="bower_components/polymer/polymer.html" />
       <paper-input-decorator error="Number of nights please" label="Nights" isInvalid="{{!$.inputNights.validity.valid}}" floatinglabel >
         <input value="{{dataNights}}" is="core-input" type="number" id="inputNights" ></input>
       </paper-input-decorator><br />
-      <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}"  >
+      <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}">
         <input value="{{dataGuests}}" type="number" is="core-input" id="inputGuests" ></input>
       </paper-input-decorator><br />
       <paper-input-decorator error="Email Address please" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
@@ -25,7 +25,9 @@ link rel="import" href="bower_components/polymer/polymer.html" />
       <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" type="number" is="core-input" id="inputPhone"></input>
       </paper-input-decorator><br />
-      <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
+      <template if="{{on_submit}}">
+        <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
+      </template>
       <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     </template>
     <script>
@@ -60,8 +62,9 @@ link rel="import" href="bower_components/polymer/polymer.html" />
               phone:this.dataPhone
 	    };
 	    if ( this.$.base.push(this.data) != false ) {
+	      debugger;
 	      this.$.toast1.show();
-	      this.on-submit();
+	      this.on_submit();
 	      this.ready();
 	    }
 	  }
