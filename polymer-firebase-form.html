@@ -5,7 +5,12 @@
 <link rel="import" href="bower_components/paper-input/paper-input.html" />
 <link rel="import" href="bower_components/paper-button/paper-button.html" />
 <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-  <polymer-element name="polymer-firebase-form" attributes="firebase_url on_submit">
+  <polymer-element name="polymer-firebase-form" attributes="firebase_url">
+<template>
+ <paper-button on-click="{{loadFrom}}" raised role="button" tabindex="0"> 
+    Booking inquiry
+  <paper-action-dialog id="loadFrom" backdrop >
+
     <template id="polymer-firebase-form">
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
     <input value="{{dataName}}" is="core-input" pattern="^[\w-]+\s?[\w-]*$" id="inputName"></input>
@@ -25,11 +30,12 @@
       <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" type="number" is="core-input" id="inputPhone"></input>
       </paper-input-decorator><br />
-      <template if="{{on_submit}}">
-        <paper-button raised label="OK" on-click="{{addEntry}}">OK</paper-button>
-      </template>
       <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     </template>
+    <paper-button label="OK" affirmative on-click="{{addEntry}}">OK</paper-button>
+  </paper-action-dialog>
+ </paper-button>
+</template>
     <script>
       Polymer('polymer-firebase-form', {
         // initialize the element's model
@@ -47,11 +53,14 @@
        dataName:"",
        dataEmail:"",
        dataPhone:"",
+       loadFrom: function(e) {
+         this.$.loadFrom.toggle();
+       },
        check:function(e) {
 	 return (moment(this.dateFrom).isAfter() && $.inputEmail.validity.valid);
        },
        data:{},
-        addEntry: function() {
+       addEntry: function() {
 	  if (this.check) {
             this.data={
               date:this.dateFrom+"",
@@ -64,7 +73,6 @@
 	    if ( this.$.base.push(this.data) != false ) {
 	      debugger;
 	      this.$.toast1.show();
-	      this.on_submit();
 	      this.ready();
 	    }
 	  }
