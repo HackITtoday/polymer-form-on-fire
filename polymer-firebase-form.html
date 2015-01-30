@@ -29,10 +29,10 @@
       <paper-input-decorator isInvalid="{{!$.inputPhone.validity.valid}}" error="This is not a phone number!" label="Telephone" floatinglabel >
         <input value="{{dataPhone}}" type="number" is="core-input" id="inputPhone"></input>
       </paper-input-decorator><br />
-      <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
     <paper-button label="OK" affirmative on-click="{{addEntry}}">OK</paper-button>
   </paper-action-dialog>
  </paper-button>
+ <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
 </template>
     <script>
       Polymer('polymer-firebase-form', {
