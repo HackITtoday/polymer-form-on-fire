@@ -78,14 +78,14 @@
               location:this.dataLocation
 	    };
 	    if (this.$.base.push(this.data) != false) {
-	      this.$.toast1.show();
+	      this.$.toast1.show();// Sent
 	      this.ready();
 	    } else {
-	      this.$.toast2.show();
+	      this.$.toast2.show();// Not sent
 	    }
           } else {
             return false;
-	    this.$.toast3.show();
+	    this.$.toast3.show();// Not fill in
           }
         }
       });
