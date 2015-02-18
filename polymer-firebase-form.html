@@ -1,4 +1,3 @@
-
 <link rel="import" href="/bower_components/polymer/polymer.html" />
 <link rel="import" href="/bower_components/firebase-element/firebase-element.html" />
 <link rel="import" href="/bower_components/paper-datepicker/paper-datepicker.html" />
@@ -10,9 +9,9 @@
     <paper-button on-click="{{loadFrom}}" raised role="button" tabindex="0"> 
     Booking inquiry
   <paper-action-dialog id="loadFrom" backdrop >
-
-    <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
-    <input value="{{dataName}}" is="core-input" pattern="^[\w-]+\s?[\w-]*$" id="inputName"></input>
+  <content select="h1"></content>
+    <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Location" floatinglabel >
+      <input value="{{dataLocation}}" is="core-input" id="inputLocation"></input>
     </paper-input-decorator><br />
       <paper-datepicker locale="en-gb" formatDate="ll" datePicked="{{dateFrom}}" ></paper-datepicker>
       <firebase-element id="base" location="{{firebase_url}}">
@@ -23,6 +22,9 @@
       <paper-input-decorator error="Just the number of guests please" label="Number of Guests" floatinglabel isInvalid="{{!$.inputGuests.validity.valid}}">
         <input value="{{dataGuests}}" type="number" is="core-input" id="inputGuests" ></input>
       </paper-input-decorator><br />
+    <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Name" floatinglabel >
+      <input value="{{dataName}}" is="core-input" pattern="^[\w-]+\s?[\w-]*$" id="inputName"></input>
+    </paper-input-decorator><br />
       <paper-input-decorator error="Email Address please" label="Email" floatinglabel  isInvalid="{{!$.inputEmail.validity.valid}}"  >
         <input value="{{dataEmail}}" type="email" is="core-input" id="inputEmail"></input>
       </paper-input-decorator><br />
@@ -40,6 +42,7 @@
         ready: function() {
           this.dateFrom = moment();
           this.dataDate="";
+          this.dataLocation="";
           this.dataNights="";
           this.dataGuests="";
           this.dataName="";
@@ -49,12 +52,15 @@
        dataNights:"",
        dataGuests:"",
        dataName:"",
+       dataLocation:"",
        dataEmail:"",
        dataPhone:"",
        loadFrom: function(e) {
          this.$.loadFrom.toggle();
        },
        check:function(e) {
+         debugger;
+         alert( moment(this.dateFrom).isAfter() );
 	 return (moment(this.dateFrom).isAfter() && $.inputEmail.validity.valid);
        },
        data:{},
@@ -66,13 +72,16 @@
               guests:this.dataGuests,
               name:this.dataName,
               email:this.dataEmail,
-              phone:this.dataPhone
+              phone:this.dataPhone,
+              location:this.dataLocation
 	    };
 	    if ( this.$.base.push(this.data) != false ) {
 	      this.$.toast1.show();
 	      this.ready();
 	    }
-	  }
+          } else {
+            return false;
+          }
         }
       });
   </script>
