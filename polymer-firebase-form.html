@@ -36,6 +36,7 @@
  </paper-button>
  <paper-toast raised text="Your Message has Been sent" id="toast1" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
  <paper-toast raised text="Your Message has NOT Been sent PHONE US NOW" id="toast2" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
+ <paper-toast raised text="Please fill in the form" id="toast3" touch-action="none" class="core-transition core-transition-bottom"></paper-toast>
 </template>
     <script>
       Polymer('polymer-firebase-form', {
@@ -76,7 +77,7 @@
               phone:this.dataPhone,
               location:this.dataLocation
 	    };
-	    if ( this.$.base.push(this.data) != false ) {
+	    if (this.$.base.push(this.data) != false) {
 	      this.$.toast1.show();
 	      this.ready();
 	    } else {
@@ -84,6 +85,7 @@
 	    }
           } else {
             return false;
+	    this.$.toast3.show();
           }
         }
       });
