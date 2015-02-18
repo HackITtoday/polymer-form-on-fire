@@ -8,7 +8,7 @@
   <template id="polymer-firebase-form">
     <paper-button on-click="{{loadFrom}}" raised role="button" tabindex="0"> 
     Booking inquiry
-  <paper-action-dialog id="loadFrom" backdrop >
+  <paper-action-dialog id="loadFrom" backdrop autoCloseDisabled >
   <content select="h1"></content>
     <paper-input-decorator error="Just your first name and last name please" isInvalid="{{!$.inputName.validity.valid}}" label="Location" floatinglabel >
       <input value="{{dataLocation}}" is="core-input" id="inputLocation"></input>
